@@ -49,9 +49,25 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,
             'engine' => null,
         ],
+
+
+        'radius' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_RADIUS', '127.0.0.1'),
+            'port' => env('DB_PORT_RADIUS', '3306'),
+            'database' => env('DB_DATABASE_RADIUS', 'forge'),
+            'username' => env('DB_USERNAME_RADIUS', 'forge'),
+            'password' => env('DB_PASSWORD_RADIUS', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
+
 
         'pgsql' => [
             'driver' => 'pgsql',
