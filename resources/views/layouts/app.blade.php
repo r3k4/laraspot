@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{!! mix('/css/app.css') !!}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -23,11 +23,13 @@
 <body>
     <div id="app">
     @include('layouts.komponen.nav_atas')
+    @include('layouts.komponen.modal')
 
         @yield('content')
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="{!! mix('/js/app.js') !!}"></script>
+    @yield('custom_script')
 </body>
 </html>

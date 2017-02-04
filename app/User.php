@@ -9,7 +9,6 @@ class User extends Authenticatable
 {
     use Notifiable;
  
-    protected $connection = 'radius';
     protected $table = 'mst_users';
 
     protected $fillable = [

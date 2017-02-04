@@ -35,6 +35,13 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+
+                           <li @if(isset($backend_profile_home)) @endif>
+                                <a href="{{ route('backend.profile.index') }}">
+                                    Profile
+                                </a>
+                           </li>
+                        
                             <li>
                                 <a href="{{ url('/logout') }}"
                                     onclick="event.preventDefault();
