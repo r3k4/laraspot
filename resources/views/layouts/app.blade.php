@@ -25,6 +25,8 @@
     @include('layouts.komponen.nav_atas')
     @include('layouts.komponen.modal')
 
+    @include('layouts.komponen.pesan')
+
         @yield('content')
     </div>
 

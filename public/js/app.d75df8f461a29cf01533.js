@@ -12129,13 +12129,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         console.log('Component mounted.');
     },
-
     data: function data() {
         return {
             oke: 'sip',
             showModal: false
         };
     },
+
     methods: {
         hideModal: function hideModal() {
             this.showModal = false;
@@ -12179,7 +12179,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {
+/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {// import Pace from 'pace-progress';
+
 window._ = __webpack_require__(35);
 
 /**
@@ -12191,6 +12192,7 @@ window._ = __webpack_require__(35);
 window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(2);
 
 __webpack_require__(34);
+// require('pace');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces

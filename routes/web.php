@@ -27,7 +27,4 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
 
 Route::get('/home', 'HomeController@index');
 
-
-Route::get('oke', function(){
-	return 'oke';
-});
+ 

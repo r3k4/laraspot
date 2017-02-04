@@ -10,8 +10,10 @@
                 <div class="panel-body">
                     You are logged in!
                     <hr>
-                    {!! QrCode::size(200)->generate(request()->url()) !!}
-                </div>
+                    <img src="data:image/png;base64, {!! base64_encode( QrCode::format('png')->size(200)->merge('/public/img/logo.png')->generate(request()->url()) ) !!} ">
+
+
+                 </div>
             </div>
         </div>
     </div>

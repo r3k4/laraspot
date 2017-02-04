@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Radacct;
+use App\Services\Users\updateUserPasswordService;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     public $base_view = 'konten.backend.profile.';
+    protected $radacct;
 
-    public function __construct()
+    public function __construct(Radacct $radacct)
     {
+        $this->radacct = $radacct;
     	view()->share('backend_profile_home', true);
     	view()->share('base_view', $this->base_view);
     }
 
     public function index()
     {
-    	return view($this->base_view.'index');
+        $jml_download =  $this->radacct->getMyDownloadUsagePackets();
+        $jml_upload =  $this->radacct->getMyUploadUsagePackets();
+    	return view($this->base_view.'index', compact('jml_upload', 'jml_download'));
     }
 
-    public function update_profile()
+    public function update_profile(updateUserPasswordService $update)
     {
-        $this->validate(request(),[
-            'password_lama' => 'required',
-            'password'      => 'required|confirmed'
-        ]);
-
-        return request()->all();
+        return $update->handle();
     }
 
 }

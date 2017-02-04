@@ -1,3 +1,4 @@
+// import Pace from 'pace-progress';
 
 window._ = require('lodash');
 
@@ -10,6 +11,7 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 
 require('bootstrap-sass');
+// require('pace');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
