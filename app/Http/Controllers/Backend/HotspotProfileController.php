@@ -59,8 +59,8 @@ class HotspotProfileController extends Controller
     		'op'			=> 'required',
     		'value'			=> 'required'
     	]);
-    	
-    	
+
+    	// return $this->mst_profile->
     }    
 
 }
