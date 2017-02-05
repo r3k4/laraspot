@@ -32,6 +32,21 @@ Route::group(['prefix' => 'hotspot_profiles'], function(){
 		'uses'	=> 'HotspotProfileController@manage_radgroupreply_insert'
 	]);
 
+	Route::get("manage_radgroupreply_edit/{mst_profile_id}/{id}",[
+		'as'	=> 'backend.hotspot_profile.manage_radgroupreply_edit',
+		'uses'	=> 'HotspotProfileController@manage_radgroupreply_edit'
+	]);
+
+	Route::post("manage_radgroupreply_update",[
+		'as'	=> 'backend.hotspot_profile.manage_radgroupreply_update',
+		'uses'	=> 'HotspotProfileController@manage_radgroupreply_update'
+	]);
+
+	Route::post("manage_radgroupreply_delete",[
+		'as'	=> 'backend.hotspot_profile.manage_radgroupreply_delete',
+		'uses'	=> 'HotspotProfileController@manage_radgroupreply_delete'
+	]);
+
 
 
 });

@@ -32,8 +32,13 @@
 					<td>{!! $list->attribute !!}</td>
 					<td>{!! $list->op !!}</td>
 					<td>{!! $list->value !!}</td>
-					<td class="text-center"></td>
+					<td class="text-center">
+						@include($base_view.'popup.action.edit_radgroupreply')
+						||
+						@include($base_view.'popup.action.delete_radgroupreply')
+					</td>
 				</tr>
+				<?php $no++; ?>
 			@endforeach
 			</tbody>
 		</table>

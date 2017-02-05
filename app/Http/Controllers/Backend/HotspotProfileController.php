@@ -60,7 +60,37 @@ class HotspotProfileController extends Controller
     		'value'			=> 'required'
     	]);
 
-    	// return $this->mst_profile->
+    	return $this->radgroupreply->create(request()->except('_token'));
     }    
+
+
+    public function manage_radgroupreply_edit($mst_profile_id, $id)
+    {
+        $profile = $this->mst_profile->find($mst_profile_id);
+        $radgroupreply = $this->radgroupreply->find($id);
+        $vars = compact('profile', 'radgroupreply');
+        return view($this->base_view.'popup.manage_radgroupreply_edit', $vars);
+    }    
+
+    public function manage_radgroupreply_update()
+    {
+        $this->validate(request(),[
+            'attribute'     => 'required',
+            'op'            => 'required',
+            'value'         => 'required'
+        ]);
+
+        return $this->radgroupreply->whereId(request()->id)->update(request()->except('_token'));
+    }   
+
+    public function manage_radgroupreply_delete() 
+    {
+        $q = $this->radgroupreply->find(request()->id);
+        if(count($q)>0){
+            $q->delete();
+        }
+        return 'ok';
+    }
+
 
 }

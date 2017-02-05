@@ -1,5 +1,5 @@
 <h3>
-	Add Attribute Hotspot Profile - {!! $profile->nama !!}
+	Edit Attribute Hotspot Profile - {!! $profile->nama !!}
 </h3>
 <hr>
 
@@ -9,17 +9,17 @@
 		
 		<div class="form-group">
 			{!! Form::label('attribute', 'Attribute :') !!}
-			{!! Form::text('attribute', '', ['id' => 'attribute', 'placeholder' => 'attribute profile...', 'class' => 'form-control']) !!}
+			{!! Form::text('attribute', $radgroupreply->attribute, ['id' => 'attribute', 'placeholder' => 'attribute profile...', 'class' => 'form-control']) !!}
 		</div>
 
 		<div class="form-group">
 			{!! Form::label('op', 'Op :') !!}
-			{!! Form::text('op', '', ['id' => 'op', 'placeholder' => 'op profile...', 'class' => 'form-control']) !!}
+			{!! Form::text('op', $radgroupreply->op, ['id' => 'op', 'placeholder' => 'op profile...', 'class' => 'form-control']) !!}
 		</div>
 
 		<div class="form-group">
 			{!! Form::label('value', 'Value :') !!}
-			{!! Form::text('value', '', ['id' => 'value', 'placeholder' => 'value profile...', 'class' => 'form-control']) !!}
+			{!! Form::text('value', $radgroupreply->value, ['id' => 'value', 'placeholder' => 'value profile...', 'class' => 'form-control']) !!}
 		</div>
 
 		<div class="form-group">
@@ -38,6 +38,7 @@ $('#simpan').click(function(){
 	$('#pesan').removeClass('alert alert-danger animated shake').html('');
 
 form_data ={
+	id : {{ $radgroupreply->id }},
 	groupname : "{!! $profile->nama !!}",
 	attribute : $('#attribute').val(),
 	op : $('#op').val(),
@@ -46,7 +47,7 @@ form_data ={
 }
 $('#simpan').attr('disabled', 'disabled');
 	$.ajax({
-		url : '{{ route("backend.hotspot_profile.manage_radgroupreply_insert") }}',
+		url : '{{ route("backend.hotspot_profile.manage_radgroupreply_update") }}',
 		data : form_data,
 		type : 'post',
 		error:function(xhr, status, error){
