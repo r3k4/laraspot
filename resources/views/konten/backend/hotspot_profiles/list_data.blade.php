@@ -3,7 +3,7 @@
 		<tr>
 			<th class="text-center" width="10px">No.</th>
 			<th>Nama Profile</th>
-			<th>Jml User</th>
+			<th width="100px" class="text-center">Jml User</th>
 			<th class="text-center" width="100px">
 				Action
 			</th>
@@ -15,8 +15,10 @@
 		<tr>
 			<td class="text-center">{!! $no !!}</td>
 			<td>{!! $list->nama !!}</td>
-			<td>{!! count($list->radusergroup) !!}</td>
-			<td class="text-center"></td>
+			<td class="text-center">{!! count($list->radusergroup) !!}</td>
+			<td class="text-center">
+				@include($base_view.'action.manage_radgroupreply')
+			</td>
 		</tr>
 		<?php $no++; ?>
 		@endforeach

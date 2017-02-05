@@ -2,6 +2,7 @@
 
 namespace App\Models\Mst;
 
+use App\Models\Radgroupreply;
 use App\Models\Radusergroup;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,11 @@ class Profile extends Model
     public function radusergroup()
     {
     	return $this->hasMany(Radusergroup::class, 'groupname', 'nama');
+    }
+
+    public function radgroupreply()
+    {
+    	return $this->hasMany(Radgroupreply::class, 'groupname', 'nama');
     }
 
 
