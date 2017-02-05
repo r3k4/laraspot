@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Radgroupreply;
 use Illuminate\Database\Eloquent\Model;
 
 class Radcheck extends Model
@@ -30,6 +31,5 @@ class Radcheck extends Model
     	return $query->whereUsername($username);
     }
 
-
-
+ 
 }

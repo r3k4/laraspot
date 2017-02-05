@@ -19,7 +19,26 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                &nbsp;
+
+
+            @if(auth()->check())
+               <li @if(isset($backend_home)) class="active" @endif>
+                    <a href="{{ route('backend.home.index') }}">
+                        <i class="fa fa-home"></i> Home
+                    </a>
+               </li>
+               <li @if(isset($backend_usages_home)) class="active" @endif>
+                    <a href="{{ route('backend.usages.index') }}">
+                        <i class="fa fa-database"></i> Usages
+                    </a>
+               </li>
+               <li @if(isset($backend_hotspot_profile_home)) class="active" @endif>
+                    <a href="{{ route('backend.hotspot_profile.index') }}">
+                        <i class="fa fa-list"></i> Hotspot Profiles
+                    </a>
+               </li>
+            @endif
+
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -29,14 +48,17 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
-                    <li class="dropdown">
+                    <li class="dropdown   
+
+                     @if(isset($backend_profile_home))  active   @endif
+                    ">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
 
-                           <li @if(isset($backend_profile_home)) @endif>
+                           <li @if(isset($backend_profile_home)) class="active"  @endif>
                                 <a href="{{ route('backend.profile.index') }}">
                                     Profile
                                 </a>

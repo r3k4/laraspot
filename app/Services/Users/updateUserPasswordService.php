@@ -40,7 +40,6 @@ class updateUserPasswordService
 
         // end of password hotspot 
 
-        // return back()->with('pesan_error', 'password gagal ter-update');
 	}	
 
 

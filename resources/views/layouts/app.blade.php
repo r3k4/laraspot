@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{!! mix('/css/app.css') !!}" rel="stylesheet">
+    <link href="/bower_components/PACE/themes/blue/pace-theme-minimal.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -32,6 +33,7 @@
 
     <!-- Scripts -->
     <script src="{!! mix('/js/app.js') !!}"></script>
+    <script src="/bower_components/PACE/pace.min.js"></script>
     @yield('custom_script')
 </body>
 </html>

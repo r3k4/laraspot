@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('konten.frontend.home.index');
 });
  
 
@@ -21,10 +21,15 @@ require __DIR__.'/web/auth.php';
 Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => 'auth'],
 	function(){
 	
+	require __DIR__.'/web/backend/home.php'; 
 	require __DIR__.'/web/backend/profile.php'; 
+	require __DIR__.'/web/backend/usages.php'; 
+	require __DIR__.'/web/backend/hotspot_profiles.php'; 
+
+	
 
 });
 
-Route::get('/home', 'HomeController@index');
+
 
  
