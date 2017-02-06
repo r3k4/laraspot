@@ -17,6 +17,8 @@
 			<td>{!! $list->nama !!}</td>
 			<td class="text-center">{!! count($list->radusergroup) !!}</td>
 			<td class="text-center">
+				@include($base_view.'action.manage_radgroupcheck')
+				||
 				@include($base_view.'action.manage_radgroupreply')
 			</td>
 		</tr>

@@ -48,6 +48,12 @@ $(function () { $("[data-toggle='tooltip']").tooltip(); });
         $('.modal-body').load('{{ route("backend.hotspot_profile.manage_radgroupreply", null) }}/'+id)
     }
 
+
+    function manage_radgroupcheck(id){
+        $('.modal-body').html('loading... <i class="fa fa-spinner fa-spin"></i>');
+        $('#myModal').modal('show');
+        $('.modal-body').load('{{ route("backend.hotspot_profile.manage_radgroupcheck", null) }}/'+id)
+    }
 </script>
 
 @endsection
