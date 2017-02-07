@@ -180,6 +180,7 @@ return [
         // tambahan
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
     ],
 

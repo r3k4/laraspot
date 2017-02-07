@@ -25,6 +25,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
 	require __DIR__.'/web/backend/profile.php'; 
 	require __DIR__.'/web/backend/usages.php'; 
 	require __DIR__.'/web/backend/hotspot_profiles.php'; 
+	require __DIR__.'/web/backend/passport.php'; 
 
 	
 

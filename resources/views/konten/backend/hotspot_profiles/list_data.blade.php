@@ -20,6 +20,8 @@
 				@include($base_view.'action.manage_radgroupcheck')
 				||
 				@include($base_view.'action.manage_radgroupreply')
+				||
+				@include($base_view.'action.delete')
 			</td>
 		</tr>
 		<?php $no++; ?>

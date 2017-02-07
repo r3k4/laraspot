@@ -16,7 +16,7 @@
 
                 <div class="panel-body"> 
 
-                <div class="col-md-8">
+                <div id="profiles" class="col-md-8">
                     @include($base_view.'list_data')                    
                 </div>
 
@@ -31,10 +31,23 @@
 
 @endsection
 
+
+
+
  
 @section('custom_script')
 
 <script type="text/javascript">
+
+axios.get('/api/user')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ 
+  
 $('#add').click(function(){
     $('#myModal').modal('show');
     $('.modal-body').load('{{ route("backend.hotspot_profile.create") }}');

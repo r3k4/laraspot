@@ -37,6 +37,12 @@
                         <i class="fa fa-list"></i> Hotspot Profiles
                     </a>
                </li>
+               <li @if(isset($backend_passport_home)) class="active" @endif>
+                    <a href="{{ route('backend.passport.index') }}">
+                        <i class="fa fa-cubes"></i> Passport
+                    </a>
+               </li>
+
             @endif
 
             </ul>
