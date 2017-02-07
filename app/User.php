@@ -26,6 +26,8 @@ class User extends Authenticatable
     ];
 
     public function findForPassport($username) {
+            // return 'ok';
+            \Log::info('username: '.$username);
         return $this->where('username', '=', $username)->first();
     }
 
