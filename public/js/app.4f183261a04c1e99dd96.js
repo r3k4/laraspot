@@ -12956,7 +12956,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = {
     mounted: function mounted() {
+        this.fetchUser();
         console.log('Component mounted.');
+    },
+
+    methods: {
+        fetchUser: function fetchUser() {
+            axios.get('/api/user').then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     }
 };
 

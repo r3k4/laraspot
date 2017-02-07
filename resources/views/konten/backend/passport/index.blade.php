@@ -24,19 +24,7 @@
  
 </div>
 
- 
+ <example></example>
 
 @endsection
-
- @section('custom_script')
-<script>
-axios.get('/api/user')
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });    
-</script>
-
- @endsection
+ 
