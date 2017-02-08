@@ -29,13 +29,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::routes();
 
-        // Passport::tokensCan([
-        //     'conference' => 'Access your conference information'
-        // ]);
+        Passport::tokensExpireIn(Carbon::now()->addDays(15));
 
-
-        // Passport::tokensExpireIn(Carbon::now()->addDays(7));
-        // Passport::refreshTokensExpireIn(Carbon::now()->addDays(14));
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
+     
 
 
     }
