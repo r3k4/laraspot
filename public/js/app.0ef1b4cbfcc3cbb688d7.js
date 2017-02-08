@@ -12953,11 +12953,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     mounted: function mounted() {
         this.fetchUser();
         console.log('Component mounted.');
+    },
+    data: function data() {
+        return {
+            nama: "",
+            level: ""
+        };
     },
 
     methods: {
@@ -12965,7 +12990,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get('/api/user').then(function (response) {
-                _this.clients = response.data;
+                _this.nama = response.data.fk__mst_data_user;
+                _this.level = response.data.ref_user_level_id;
+                // this.clients = response.data;
             });
             // axios.get('/api/user')
             //   .then(function (response) {
@@ -34469,7 +34496,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading"
   }, [_vm._v("Example Component")]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  }, [_vm._t("default")], 2)])])])])
+  }, [_c('table', [_c('tr', [_c('td', {
+    attrs: {
+      "width": "150px"
+    }
+  }, [_vm._v("\n                            Nama\n                        ")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "width": "10px"
+    }
+  }, [_vm._v(":")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.nama))])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "width": "150px"
+    }
+  }, [_vm._v("\n                            Level\n                        ")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "width": "10px"
+    }
+  }, [_vm._v(":")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.level))])])])])])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
