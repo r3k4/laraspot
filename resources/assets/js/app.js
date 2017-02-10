@@ -14,7 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
-Vue.component('alert', require('./components/Alert.vue'));
+// Vue.component('alert', require('./components/Alert.vue'));
 
 Vue.component('hotspot-users', require('./components/user_hotspot/UserHotspot.vue'));
 
@@ -36,6 +36,7 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue')
 );
 
+Vue.component('default-alert', require('./components/default/Alert.vue'));
 
 
 const app = new Vue({

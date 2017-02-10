@@ -39,13 +39,13 @@
 
 <script type="text/javascript">
 
-axios.get('/api/user')
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+// axios.get('/api/user')
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
  
   
 $('#add').click(function(){

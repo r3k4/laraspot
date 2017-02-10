@@ -4,6 +4,11 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
 
+        <default-alert v-if="success_msg">
+            <i style="cursor:pointer;" class="fa fa-times pull-right" @click="success_msg = false"></i>
+            d asdasd asdas
+        </default-alert>
+
 
             <div class="panel panel-default">
                 <div class="panel-heading"> 
@@ -22,7 +27,7 @@
                                         <input type="text" class="form-control" placeholder="search..." name="search" @keydown.13="searchUsers()" v-model="search_value">                
                                    </div>
                                    <div class="form-group col-md-5">
-                                        <button  v-show="search_value!=''" class="btn btn-danger pull-right" @click="fetchUser">
+                                        <button  v-show="search_value!=''" class="btn btn-danger pull-right" @click="fetchUser(null)">
                                             <i class="fa fa-refresh"></i> reset
                                         </button>            
                                         <button @click="searchUsers()" class="btn btn-info pull-right">
@@ -56,18 +61,17 @@
                                 </tbody>
                             </table>  
 
-                        
-
+                         
                         <nav aria-label="...">
                           <ul class="pager">
-                            <li>
+                            <li class="previous">
                                 <a v-if="users.prev_page_url != null" 
                                    @click.prevent="fetchUser(users.next_page_url)" 
                                    href="#">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
-                            <li>
+                            <li class="next">
                                 <a v-if="users.next_page_url != null" 
                                    @click.prevent="fetchUser(users.next_page_url)" 
                                    href="#">
@@ -98,6 +102,7 @@
         },
         data() {
             return {
+                success_msg : false,
                 showLoader : false,
                 Fungsi : new Fungsi,
                 search_value : "",
@@ -118,9 +123,9 @@
                     this.showLoader = false;
              });            
         },
-        fetchUser(url = null){
+        fetchUser(url){
             this.showLoader = true;
-            if(url == null){
+            if(url == null || url == ''){
                 var url = '/api/hotspot_users';
             } 
                 axios.get(url)
