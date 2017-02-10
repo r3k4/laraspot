@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Mst\DataUser;
 use App\Models\Radgroupreply;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,7 @@ class Radcheck extends Model
     	'op',
     	'value'
     ];
+ 
 
     /**
      * query scopes
@@ -31,5 +33,44 @@ class Radcheck extends Model
     	return $query->whereUsername($username);
     }
 
+    public function scopeJoinDataUser($query)
+    {
+        return $query->select(\DB::raw('mst_data_user.nama, radcheck.*'))
+                     ->leftJoin('mst_data_user', 'mst_data_user.username', '=', 'radcheck.username');
+    }
+
+    public function scopeOrder($query)
+    {
+        return $query->orderBy('radcheck.id', 'DESC');
+    }
+
+    public function scopeCari($query, $search_value)
+    {
+        return $query->where('radcheck.username', 'like', '%'.$search_value.'%')
+                     ->orWhere('mst_data_user.nama', 'like', '%'.$search_value.'%');
+    }
+
  
+
+    public function mst_data_user()
+    {
+        return $this->hasOne(DataUser::class, 'username', 'username');
+    }
+
+
+
+    /**
+     * custom query
+     */
+
+
+    public function getAll($search)
+    {
+        if($search){
+            return $this->joinDataUser()->cari($search)->order()->paginate(10);
+        }
+        return $this->joinDataUser()->order()->paginate(10);    
+    }
+
+
 }

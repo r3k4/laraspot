@@ -16,6 +16,10 @@ require('./bootstrap');
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('alert', require('./components/Alert.vue'));
 
+Vue.component('hotspot-users', require('./components/user_hotspot/UserHotspot.vue'));
+
+
+
 
 Vue.component(
     'passport-clients',
