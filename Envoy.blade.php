@@ -5,9 +5,9 @@
 
 
 @task('kickUser', ['on' => 'web'])
-
 	echo User-Name={{ $username }},Framed-IP-Address={{ $ip }}|/usr/bin/radclient -x {{ $na_ip }}:1700 disconnect {{ $nas_secret }}
-
-
 @endtask
 
+@task('ls', ['on' => 'web'])
+	ls -all
+@endtask

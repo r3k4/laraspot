@@ -54,9 +54,11 @@ class doKickUserHotspotJob implements ShouldQueue
     private function doKick()
     {
         $user = env('USER_SYSTEM_OS');
-        $envoy_path = "/home/".$user."/.config/composer/vendor/bin/envoy run";
+        $envoy_path = '/home/'.$user.'/.config/composer/vendor/bin/envoy run';
         $envoy_param =  "--username=".$this->username." --ip=".$this->ip." --nas_ip=".$this->nas_ip." --nas_secret=".$this->nas_secret;  
         $process = new Process($envoy_path." kickUser ".$envoy_param);
+
+        // $process = new Process('/home/reka/.config/composer/vendor/bin/envoy run ls');
         $process->setTimeout(3600);
         $process->setIdleTimeout(300);
         $process->setWorkingDirectory(base_path());
