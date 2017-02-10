@@ -62,7 +62,7 @@ class doKickUserHotspotJob implements ShouldQueue
         $process->setWorkingDirectory(base_path());
         $process->run(function ($type, $buffer)
         {
-            \Log::info(json_encode($buffer));
+            \Log::info($buffer );
             //print output
         });        
     }
