@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Mst\DataUser;
+use App\Models\Radacct;
 use App\Models\Radgroupreply;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,36 @@ class Radcheck extends Model
     	'op',
     	'value'
     ];
+
+    protected $appends = [
+        'c__total_usage',
+        'c__upload_usage',
+        'c__download_usage'
+    ];
  
+    public function getCDownloadUsageAttribute()
+    {
+        $r = new Radacct;
+        $username = $this->attributes['username'];
+        return (int) $r->userUsageDownload($username);
+    }
+
+    public function getCUploadUsageAttribute()
+    {
+        $r = new Radacct;
+        $username = $this->attributes['username'];
+        return (int) $r->userUsageUpload($username);
+    }
+
+    public function getCTotalUsageAttribute()
+    {
+        $r = new Radacct;
+        $username = $this->attributes['username'];
+        return (int) $r->userUsageTotal($username);
+    }
+
+
+
 
     /**
      * query scopes

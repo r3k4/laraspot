@@ -18,7 +18,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'fk__mst_data_user'
+        'fk__mst_data_user',      
     ];
 
 

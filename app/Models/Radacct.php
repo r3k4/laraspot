@@ -40,6 +40,7 @@ class Radacct extends Model
 
 
 
+
     /**
      * query scopes
      */
@@ -71,6 +72,24 @@ class Radacct extends Model
     public function getAllUsages()
     {
         return $this->username()->order()->paginate(10);
+    }
+
+
+    public function userUsageDownload($username)
+    {
+        return $this->where('username', '=', $username)->sum('acctoutputoctets');
+    }
+
+    public function userUsageUpload($username)
+    {
+        return $this->where('username', '=', $username)->sum('acctinputoctets');
+    }
+
+    public function userUsageTotal($username)
+    {
+        $down = $this->userUsageDownload($username);
+        $up = $this->userUsageUpload($username);
+        return (int) $down + (int) $up;
     }
 
 
