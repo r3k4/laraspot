@@ -36,7 +36,10 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue')
 );
 
+
+// default
 Vue.component('default-alert', require('./components/default/Alert.vue'));
+Vue.component('default-modal', require('./components/default/Modal.vue'));
 
 
 const app = new Vue({

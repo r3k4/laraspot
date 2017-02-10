@@ -4,6 +4,18 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
 
+    <default-modal>
+        <form @submit.prevent="onSubmit">
+            <div class="form-group">
+                <input type="text" v-model="form.nama" class="form-control" placeholder="nama...">
+            </div>   
+            <button class="btn btn-info">
+                submit
+            </button>         
+        </form>
+    </default-modal>
+
+
         <default-alert v-if="success_msg">
             <i style="cursor:pointer;" class="fa fa-times pull-right" @click="success_msg = false"></i>
             d asdasd asdas
@@ -66,7 +78,7 @@
                           <ul class="pager">
                             <li class="previous">
                                 <a v-if="users.prev_page_url != null" 
-                                   @click.prevent="fetchUser(users.next_page_url)" 
+                                   @click.prevent="fetchUser(users.prev_page_url)" 
                                    href="#">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
@@ -82,7 +94,9 @@
                         </nav>    
 
 
- 
+    <button @click="showModal">
+        modal
+    </button>
                 </div>
             </div>
         </div>
@@ -102,6 +116,7 @@
         },
         data() {
             return {
+                form : new Form({ nama : '' }),
                 success_msg : false,
                 showLoader : false,
                 Fungsi : new Fungsi,
@@ -111,6 +126,13 @@
         },
         methods: {
 
+        onSubmit(){
+            this.form.post('/api/hotspot_users/create').then(success_msg => swal('done'));
+        },
+
+        showModal(){
+            $('#default-modal').appendTo("body").modal('show');
+        },
         searchUsers(){
             this.showLoader = true;
             if(this.search_value == ''){

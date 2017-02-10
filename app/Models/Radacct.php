@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Mst\DataUser;
 use Illuminate\Database\Eloquent\Model;
 
 class Radacct extends Model
@@ -52,6 +53,13 @@ class Radacct extends Model
     public function scopeOrder($query)
     {
         return $query->orderBy('radacctid', 'DESC');
+    }
+
+
+
+    public function mst_data_user()
+    {
+        return $this->belongsTo(DataUser::class, 'username', 'username');
     }
 
 

@@ -14,6 +14,9 @@ require('bootstrap-sass');
 require('sweetalert');
 
 import Fungsi from './Helpers/Fungsi.js';
+import Form from './Helpers/core/Form.js';
+import Errors from './Helpers/core/Errors.js';
+
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
@@ -54,3 +57,7 @@ window.axios.defaults.headers.common = {
 
 
 window.Fungsi = Fungsi;
+window.Form = Form;
+window.Errors = Errors;
+
+

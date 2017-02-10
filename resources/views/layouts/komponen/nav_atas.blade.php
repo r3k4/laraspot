@@ -37,6 +37,20 @@
                         <i class="fa fa-list"></i> Hotspot Profiles
                     </a>
                </li>
+
+               <li @if(isset($backend_hotspot_users_home)) class="active" @endif>
+                    <a href="{{ route('backend.hotspot_users.index') }}">
+                        <i class="fa fa-users"></i> Hotspot Users
+                    </a>
+               </li>
+
+               <li @if(isset($backend_user_aktif_home)) class="active" @endif>
+                    <a href="{{ route('backend.user_aktif.index') }}">
+                        <i class="fa fa-check-circle"></i> User Aktif
+                    </a>
+               </li>
+
+
                <li @if(isset($backend_passport_home)) class="active" @endif>
                     <a href="{{ route('backend.passport.index') }}">
                         <i class="fa fa-cubes"></i> Passport

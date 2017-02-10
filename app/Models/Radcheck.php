@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Mst\DataUser;
 use App\Models\Radacct;
 use App\Models\Radgroupreply;
+use App\Models\Radusergroup;
 use Illuminate\Database\Eloquent\Model;
 
 class Radcheck extends Model
@@ -24,8 +25,17 @@ class Radcheck extends Model
     protected $appends = [
         'c__total_usage',
         'c__upload_usage',
-        'c__download_usage'
+        'c__download_usage',
+        'fk__radusergroup'
     ];
+
+    public function getFkRadusergroupAttribute()
+    {
+        $q = $this->radusergroup;
+        if(count($q)>0){
+            return $q->groupname;
+        }
+    }
  
     public function getCDownloadUsageAttribute()
     {
@@ -85,6 +95,11 @@ class Radcheck extends Model
     public function mst_data_user()
     {
         return $this->hasOne(DataUser::class, 'username', 'username');
+    }
+
+    public function radusergroup()
+    {
+        return $this->hasOne(Radusergroup::class, 'username', 'username');
     }
 
 

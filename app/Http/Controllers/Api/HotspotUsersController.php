@@ -23,5 +23,10 @@ class HotspotUsersController extends Controller
     	return $this->radcheck->getAll($search);
     }
 
+    public function create()
+    {
+        return 'ok';
+    }
+
 
 }

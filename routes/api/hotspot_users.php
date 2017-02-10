@@ -6,4 +6,8 @@ Route::group(['prefix' => 'hotspot_users'], function(){
 		'uses'	=> 'HotspotUsersController@getAllUsers'
 	]);
 
+	Route::post('create',[
+		'uses'	=> 'HotspotUsersController@create'
+	]);	
+
 });
