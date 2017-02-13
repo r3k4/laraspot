@@ -53,5 +53,11 @@ class HotspotUsersController extends Controller
     }
 
 
+    public function import()
+    {
+        return view($this->base_view.'popup.import');
+    }
+
+
 
 }

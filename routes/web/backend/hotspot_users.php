@@ -41,4 +41,10 @@ Route::group(['prefix' => 'hotspot_users'], function(){
 	]);
 
 
+	Route::get("import",[
+		'as'	=> 'backend.hotspot_users.import',
+		'uses'	=> 'HotspotUsersController@import'
+	]);
+
+
 });

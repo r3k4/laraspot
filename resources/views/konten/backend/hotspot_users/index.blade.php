@@ -8,7 +8,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading"> 
-                    @include($base_view.'komponen.tombol_add')
+                    @include($base_view.'komponen.tombol_action')
                     <h3>
                         <i class="fa fa-users"></i> Hotspot Users
                     </h3> 
@@ -40,7 +40,12 @@
 
 <script type="text/javascript">
 
- 
+
+$('#import').click(function(){
+    $('#myModal').modal('show');
+    $('.modal-body').load('{{ route("backend.hotspot_users.import") }}');
+});
+
   
 $('#add').click(function(){
     $('#myModal').modal('show');
