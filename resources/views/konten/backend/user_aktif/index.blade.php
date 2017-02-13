@@ -8,7 +8,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading"> 
-                    {{-- @include($base_view.'komponen.tombol_add') --}}
+                    @include($base_view.'komponen.tombol_kick_all')
                     <h3>
                         <i class="fa fa-check-circle"></i> User Aktif
                     </h3> 
@@ -41,6 +41,45 @@
 @section('custom_script')
 
 <script type="text/javascript">
+
+
+function kickAll(){
+      
+        swal({
+            title : 'are you sure ?',
+            type  : 'warning',
+            closeOnCancel: true,
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm : true
+            
+        }, function(isConfirm){
+            if(isConfirm){
+                $.ajax({
+                    url : '{{ route("backend.user_aktif.kick_all") }}',
+                    data : {kick : 1, _token : '{!! csrf_token() !!}' },
+                    type : 'post',
+                    error: function(err){
+                        swal('error', 'terjadi kesalahan pada sisi server!', 'error');
+                    },
+                    success:function(ok){
+                        swal({
+                        title : "success!", 
+                        text : "data telah diproses!", 
+                        type : "success"
+                        }, function(){
+                            window.location.reload();
+                        })
+                    }
+                })        
+            }
+        });
+    
+ 
+    
+
+}
+
 
 function kickUser(id)
 {
@@ -85,25 +124,11 @@ function kickUser(id)
   
 }
   
-// $('#add').click(function(){
-//     $('#myModal').modal('show');
-//     $('.modal-body').load('{{ route("backend.hotspot_users.create") }}');
-// });
+ 
 
 $(function () { $("[data-toggle='tooltip']").tooltip(); });
 
-    // function view_credentials(id){
-    //     $('.modal-body').html('loading... <i class="fa fa-spinner fa-spin"></i>');
-    //     $('#myModal').modal('show');
-    //     $('.modal-body').load('{{ route("backend.hotspot_users.view_credentials", null) }}/'+id)
-    // }
-
-
-//     function manage_radgroupcheck(id){
-//         $('.modal-body').html('loading... <i class="fa fa-spinner fa-spin"></i>');
-//         $('#myModal').modal('show');
-//         $('.modal-body').load('{{ route("backend.hotspot_profile.manage_radgroupcheck", null) }}/'+id)
-//     }
+ 
 </script>
 
 @endsection

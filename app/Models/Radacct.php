@@ -101,4 +101,10 @@ class Radacct extends Model
     }
 
 
+    public function getAllUserAktif()
+    {
+        return $this->where('acctstoptime', '=', null)->get();
+    }
+
+
 }

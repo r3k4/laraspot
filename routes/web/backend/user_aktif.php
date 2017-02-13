@@ -12,4 +12,10 @@ Route::group(['prefix' => 'user_aktif'], function(){
 		'uses'	=> 'UserAktifController@kick_user'
 	]); 
 
+	Route::post("kick_all",[
+		'as'	=> 'backend.user_aktif.kick_all',
+		'uses'	=> 'UserAktifController@kick_all'
+	]); 
+
+
 });

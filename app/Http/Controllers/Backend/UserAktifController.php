@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\Users\doKickUserHotspotJob;
 use App\Models\Radacct;
 use App\Services\Users\doKickUserService;
 use Illuminate\Http\Request;
@@ -23,14 +24,22 @@ class UserAktifController extends Controller
     public function index()
     {
     	\Carbon\Carbon::setLocale('id');
-    	$radacct = $this->radacct->where('acctstoptime', '=', null)->get();
+    	$radacct = $this->radacct->getAllUserAktif();
     	return view($this->base_view.'index', compact('radacct'));
     }
 
 
-    public function kick_user(doKickUserService $kick)
+    public function kick_user()
     {
-        return $kick->handle();
+       dispatch(new doKickUserHotspotJob(request()->radacctid));
+    }
+
+    public function kick_all()
+    {
+        $user_aktif = $this->radacct->getAllUserAktif();
+        foreach($user_aktif as $list){
+            dispatch(new doKickUserHotspotJob($list->radacctid));
+        }
     }
 
 
