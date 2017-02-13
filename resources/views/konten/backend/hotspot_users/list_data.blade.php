@@ -20,6 +20,8 @@
 			<td>{!! fungsi()->size($list->c__total_usage) !!}</td>
 			<td class="text-center">
 				@include($base_view.'action.view_credentials')
+				||
+				@include($base_view.'action.delete')
 			</td>
 		</tr>
 		<?php $no++; ?>

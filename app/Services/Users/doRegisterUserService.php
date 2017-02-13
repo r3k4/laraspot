@@ -5,6 +5,7 @@ namespace App\Services\Users;
 use App\Models\Mst\DataUser;
 use App\Models\Radcheck;
 use App\Models\Radusergroup;
+use App\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class doRegisterUserService 

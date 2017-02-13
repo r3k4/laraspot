@@ -41,6 +41,46 @@
 <script type="text/javascript">
 
 
+
+
+function deleteUser(id){
+    swal({
+        title : 'are you sure ?',
+        type  : 'warning',
+        closeOnCancel: true,
+        showCancelButton: true,
+        closeOnConfirm: false,
+        showLoaderOnConfirm : true
+        
+    }, function(isConfirm){
+        if(isConfirm){
+            $.ajax({
+                url : '{{ route("backend.hotspot_users.delete") }}',
+                data : {id : id, _token : '{!! csrf_token() !!}' },
+                type : 'post',
+                error: function(err){
+                    swal('error', 'terjadi kesalahan pada sisi server!', 'error');
+                },
+                success:function(ok){
+                    swal({
+                    title : "success!", 
+                    text : "data telah terhapus!", 
+                    type : "success"
+                    }, function(){
+                        window.location.reload();
+                    })
+                }
+            })      
+        }
+    });    
+}
+
+
+
+
+
+
+
 $('#import').click(function(){
     $('#myModal').modal('show');
     $('.modal-body').load('{{ route("backend.hotspot_users.import") }}');

@@ -8,6 +8,7 @@ use App\Models\Mst\DataUser;
 use App\Models\Mst\Profile;
 use App\Models\Radcheck;
 use App\Models\Radusergroup;
+use App\Services\Users\deleteUserService;
 use Illuminate\Http\Request;
 
 class HotspotUsersController extends Controller
@@ -72,6 +73,12 @@ class HotspotUsersController extends Controller
         dispatch(new importUsersJob($lokasi_file, request()->mst_profile));
 
         return ['files' => request()->all() ];
+    }
+
+
+    public function delete(deleteUserService $delete)
+    {
+        return $delete->handle();
     }
 
 

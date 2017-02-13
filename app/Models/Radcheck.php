@@ -76,7 +76,8 @@ class Radcheck extends Model
     public function scopeJoinDataUser($query)
     {
         return $query->select(\DB::raw('mst_data_user.nama, radcheck.*'))
-                     ->leftJoin('mst_data_user', 'mst_data_user.username', '=', 'radcheck.username');
+                     ->leftJoin('mst_data_user', 'mst_data_user.username', '=', 'radcheck.username')
+                     ->groupBy('radcheck.id');
     }
 
     public function scopeOrder($query)
