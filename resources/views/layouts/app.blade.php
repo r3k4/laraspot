@@ -12,8 +12,7 @@
 
     <!-- Styles -->
     <link href="{!! mix('/css/app.css') !!}" rel="stylesheet">
-    <link href="/bower_components/PACE/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
+ 
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -30,6 +29,17 @@
 
         @yield('content')
     </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Matrix Hotspot.
+        <span class="pull-right">
+            Developed by Reka Prihatanto
+        </span>
+        </p>
+      </div>
+    </footer>
+
 
     <!-- Scripts -->
     <script src="{!! mix('/js/app.js') !!}"></script>

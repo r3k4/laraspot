@@ -34,16 +34,9 @@
 				$mnt = date('i', strtotime($list->acctstarttime));
 				$dtk = date('s', strtotime($list->acctstarttime));
 			 ?>
-			
-				  @if(\Carbon\Carbon::create($thn, $bln, $tgl, $jam, $mnt, $dtk)->diffInDays() < 7)
-				    <span data-toggle='tooltip' title="{!! fungsi()->date_to_tgl(date('Y-m-d', strtotime($list->acctstarttime))) !!}">
-				      {{ \Carbon\Carbon::create($thn, $bln, $tgl, $jam, $mnt, $dtk)->diffForHumans() }}
-				    </span>
-				  @else   
-				    {!! fungsi()->date_to_tgl(date('Y-m-d', strtotime($list->acctstarttime))) !!}
-				  @endif
-
-
+		    <span data-toggle='tooltip' title="{!! fungsi()->date_to_tgl(date('Y-m-d', strtotime($list->acctstarttime))).' '.date('H:i:s', strtotime($list->acctstarttime)) !!}">
+		      {{ \Carbon\Carbon::create($thn, $bln, $tgl, $jam, $mnt, $dtk)->diffForHumans() }}
+		    </span>
 			</td>
 			<td>
 				{!! fungsi()->size((int)$list->acctinputoctets + (int)$list->acctoutputoctets) !!}
