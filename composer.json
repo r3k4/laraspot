@@ -11,6 +11,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
         "pda/pheanstalk": "^3.1",
+        "php-excel-reader/spreadsheet-reader": "dev-master",
         "simplesoftwareio/simple-qrcode": "^1.5"
     },
     "require-dev": {

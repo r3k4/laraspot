@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\importUsersJob;
 use App\Models\Mst\DataUser;
 use App\Models\Mst\Profile;
 use App\Models\Radcheck;
@@ -55,7 +56,22 @@ class HotspotUsersController extends Controller
 
     public function import()
     {
-        return view($this->base_view.'popup.import');
+        $max = explode('M', ini_get('upload_max_filesize'));
+        $max_upload = $max[0] * 1048576;            
+        $mst_profile = $this->mst_profile->all()->pluck('nama', 'nama');
+        return view($this->base_view.'popup.import', compact('mst_profile', 'max_upload'));
+    }
+
+
+    public function do_import()
+    {
+
+        $file = request()->file('file_import')->storeAs('users', 'users.xls');
+        $lokasi_file = storage_path('app/users/users.xls');
+        chmod($lokasi_file, 0777);        
+        dispatch(new importUsersJob($lokasi_file, request()->mst_profile));
+
+        return ['files' => request()->all() ];
     }
 
 

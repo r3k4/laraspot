@@ -20,29 +20,51 @@ class doRegisterUserService
             'password'      => 'required|confirmed'
         ]);
 
+        $this->insertDataUser(request()->username, 
+                              request()->password, 
+                              request()->mst_profile_id,
+                              request()->nama,
+                              request()->priority,
+                              request()->keterangan
+                            );
+
+        return 'ok';
+	}
+
+
+    public function insertDataUser($username, $password, $groupname, $nama, $priority = 8, $keterangan = '')
+    {
         // insert to radcheck
         $data_radcheck = [
-            'username'  => request()->username,
+            'username'  => $username,
             'attribute' => 'Cleartext-Password',
             'op'        => ':=',
-            'value'     => request()->password
+            'value'     => $password
         ];
         Radcheck::create($data_radcheck);
 
 
-        // insert to mst_users
+        // insert to mst_data_user
         $create_dataUser = [
-            'username'  => request()->username,
-            'nama'  => request()->nama,
-            'keterangan'    => request()->keterangan
+            'username'  => $username,
+            'nama'  => $nama,
+            'keterangan'    => $keterangan
         ];
         DataUser::create($create_dataUser);
 
+
+        $insert_mst_user = [
+            'username'  => $username,
+            'password'  => bcrypt($password),
+            'ref_user_level_id' => 2
+        ];
+
+        User::create($insert_mst_user);
+
+
         // insert ke group
-        Radusergroup::create(['username' => request()->username, 'groupname' => request()->mst_profile_id, 'priority' => request()->priority]);
+        Radusergroup::create(['username' => $username, 'groupname' => $groupname, 'priority' => $priority]);
 
-
-        return 'ok';		
-	}
+    }
 
 }

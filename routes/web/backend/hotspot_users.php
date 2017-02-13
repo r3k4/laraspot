@@ -46,5 +46,9 @@ Route::group(['prefix' => 'hotspot_users'], function(){
 		'uses'	=> 'HotspotUsersController@import'
 	]);
 
+	Route::post("do_import",[
+		'as'	=> 'backend.hotspot_users.do_import',
+		'uses'	=> 'HotspotUsersController@do_import'
+	]);
 
 });

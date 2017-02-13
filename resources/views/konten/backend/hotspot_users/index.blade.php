@@ -61,6 +61,11 @@ $(function () { $("[data-toggle='tooltip']").tooltip(); });
     }
 
 
+    
+$('#myModal').on('hidden.bs.modal', function (e) {
+    window.location.reload();
+})
+
 //     function manage_radgroupcheck(id){
 //         $('.modal-body').html('loading... <i class="fa fa-spinner fa-spin"></i>');
 //         $('#myModal').modal('show');
