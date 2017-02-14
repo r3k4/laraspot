@@ -2,14 +2,22 @@ class Radcheck {
 
 	findBy(username)
 	{
-        axios.get('/api/hotspot_users/findBy/'+username)
-            .then(response => {
-            	return response.data;
-                // this.showLoader = false;
-                // this.search_value = '';
-                // this.users = response.data;
-            });		
+       return axios.get('/api/hotspot_users/findBy/'+username);
 	}
+
+    getAll(url)
+    {
+        if(url == '' || url == null){
+            url = '/api/hotspot_users/';
+        }
+
+        return axios.get(url);        
+    }
+
+    getBy(search_value)
+    {
+        return axios.get('/api/hotspot_users?search='+search_value);
+    }
 
 }
 export default Radcheck;

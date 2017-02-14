@@ -9,6 +9,7 @@ use App\Models\Mst\Profile;
 use App\Models\Radcheck;
 use App\Models\Radusergroup;
 use App\Services\Users\deleteUserService;
+use App\Services\Users\doRegisterUserService;
 use Illuminate\Http\Request;
 
 class HotspotUsersController extends Controller
@@ -27,8 +28,8 @@ class HotspotUsersController extends Controller
 
     public function index()
     {
-    	// $hotspot_users = $this->radcheck->getAll(request()->get('search'));
-    	return view($this->base_view.'index_js', compact('hotspot_users'));
+    	$hotspot_users = $this->radcheck->getAll(request()->get('search'));
+    	return view($this->base_view.'index', compact('hotspot_users'));
     }
 
     public function create()

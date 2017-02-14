@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import Radcheck from "./Models/Radcheck.js";
+import Radcheck from "../../Models/Radcheck.js";
 
     export default {
         mounted() {            
@@ -123,15 +123,21 @@ import Radcheck from "./Models/Radcheck.js";
                 success_msg : false,
                 showLoader : false,
                 Fungsi : new Fungsi,
+                Radcheck : new Radcheck,
                 search_value : "",
                 users : [],
-                dataUser: []
+                dataUser: [],
+                users_total : 0
             }
         },
         methods: {
 
             onSubmit(){
-                this.form.post('/api/hotspot_users/create').then(success_msg => swal('done'));
+                this.form.post('/api/hotspot_users/create')
+                .then(success_msg => swal('done'))
+                 .catch(function (error) {
+                    console.log(error);
+                 });                 
             },
 
             showModal(){
@@ -143,27 +149,30 @@ import Radcheck from "./Models/Radcheck.js";
                     this.showLoader = false;
                     return false;
                 } 
-                axios.get('/api/hotspot_users?search='+this.search_value)
+                this.Radcheck.getBy(this.search_value)
                     .then(response => {
                         this.users = response.data;
                         this.showLoader = false;
-                 });            
+                 })
+                 .catch(function (error) {
+                    console.log(error);
+                 });                             
             },
             fetchUser(url){
                 this.showLoader = true;
-                if(url == null || url == ''){
-                    var url = '/api/hotspot_users';
-                } 
-                    axios.get(url)
+                this.users = this.Radcheck.getAll(url)
                         .then(response => {
                             this.showLoader = false;
                             this.search_value = '';
                             this.users = response.data;
-                        });
-                 
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });                  
             },
             showDetail(username){
-                this.dataUser = Radcheck.findBy(username);
+                console.log(this.Radcheck.findBy(username));
+                // this.dataUser = Radcheck.findBy(username);
             }
 
         } //methods

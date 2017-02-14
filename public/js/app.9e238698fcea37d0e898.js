@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 77);
+/******/ 	return __webpack_require__(__webpack_require__.s = 78);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10874,7 +10874,7 @@ var _defaultParams2 = _interopRequireWildcard(_defaultParams);
  * Add modal + overlay to DOM
  */
 
-var _injectedHTML = __webpack_require__(54);
+var _injectedHTML = __webpack_require__(55);
 
 var _injectedHTML2 = _interopRequireWildcard(_injectedHTML);
 
@@ -11464,7 +11464,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(74)
+var listToStyles = __webpack_require__(75)
 
 /*
 type StyleObject = {
@@ -12021,7 +12021,7 @@ module.exports = g;
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(46);
+__webpack_require__(47);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -12029,20 +12029,20 @@ __webpack_require__(46);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(57));
+Vue.component('example', __webpack_require__(58));
 // Vue.component('alert', require('./components/Alert.vue'));
 
-Vue.component('hotspot-users', __webpack_require__(63));
+Vue.component('hotspot-users', __webpack_require__(64));
 
-Vue.component('passport-clients', __webpack_require__(61));
+Vue.component('passport-clients', __webpack_require__(62));
 
-Vue.component('passport-authorized-clients', __webpack_require__(60));
+Vue.component('passport-authorized-clients', __webpack_require__(61));
 
-Vue.component('passport-personal-access-tokens', __webpack_require__(62));
+Vue.component('passport-personal-access-tokens', __webpack_require__(63));
 
 // default
-Vue.component('default-alert', __webpack_require__(58));
-Vue.component('default-modal', __webpack_require__(59));
+Vue.component('default-alert', __webpack_require__(59));
+Vue.component('default-modal', __webpack_require__(60));
 
 var app = new Vue({
     el: '#app'
@@ -13820,7 +13820,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-throw new Error("Cannot find module \"./Models/Radcheck.js\"");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Models_Radcheck_js__ = __webpack_require__(46);
 //
 //
 //
@@ -13946,9 +13946,11 @@ throw new Error("Cannot find module \"./Models/Radcheck.js\"");
             success_msg: false,
             showLoader: false,
             Fungsi: new Fungsi(),
+            Radcheck: new __WEBPACK_IMPORTED_MODULE_0__Models_Radcheck_js__["a" /* default */](),
             search_value: "",
             users: [],
-            dataUser: []
+            dataUser: [],
+            users_total: 0
         };
     },
 
@@ -13956,6 +13958,8 @@ throw new Error("Cannot find module \"./Models/Radcheck.js\"");
         onSubmit: function onSubmit() {
             this.form.post('/api/hotspot_users/create').then(function (success_msg) {
                 return swal('done');
+            }).catch(function (error) {
+                console.log(error);
             });
         },
         showModal: function showModal() {
@@ -13969,26 +13973,28 @@ throw new Error("Cannot find module \"./Models/Radcheck.js\"");
                 this.showLoader = false;
                 return false;
             }
-            axios.get('/api/hotspot_users?search=' + this.search_value).then(function (response) {
+            this.Radcheck.getBy(this.search_value).then(function (response) {
                 _this.users = response.data;
                 _this.showLoader = false;
+            }).catch(function (error) {
+                console.log(error);
             });
         },
         fetchUser: function fetchUser(url) {
             var _this2 = this;
 
             this.showLoader = true;
-            if (url == null || url == '') {
-                var url = '/api/hotspot_users';
-            }
-            axios.get(url).then(function (response) {
+            this.users = this.Radcheck.getAll(url).then(function (response) {
                 _this2.showLoader = false;
                 _this2.search_value = '';
                 _this2.users = response.data;
+            }).catch(function (error) {
+                console.log(error);
             });
         },
         showDetail: function showDetail(username) {
-            this.dataUser = __WEBPACK_IMPORTED_MODULE_0__Models_Radcheck_js___default.a.findBy(username);
+            console.log(this.Radcheck.findBy(username));
+            // this.dataUser = Radcheck.findBy(username);
         }
     } //methods
 };
@@ -14318,13 +14324,53 @@ var Form = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Radcheck = function () {
+    function Radcheck() {
+        _classCallCheck(this, Radcheck);
+    }
+
+    _createClass(Radcheck, [{
+        key: 'findBy',
+        value: function findBy(username) {
+            return axios.get('/api/hotspot_users/findBy/' + username);
+        }
+    }, {
+        key: 'getAll',
+        value: function getAll(url) {
+            if (url == '' || url == null) {
+                url = '/api/hotspot_users/';
+            }
+
+            return axios.get(url);
+        }
+    }, {
+        key: 'getBy',
+        value: function getBy(search_value) {
+            return axios.get('/api/hotspot_users?search=' + search_value);
+        }
+    }]);
+
+    return Radcheck;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = Radcheck;
+
+/***/ }),
+/* 47 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Helpers_Fungsi_js__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Helpers_core_Form_js__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Helpers_core_Errors_js__ = __webpack_require__(44);
 // import Pace from 'pace-progress';
 
-window._ = __webpack_require__(51);
+window._ = __webpack_require__(52);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -14334,8 +14380,8 @@ window._ = __webpack_require__(51);
 
 window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(2);
 
-__webpack_require__(47);
-__webpack_require__(56);
+__webpack_require__(48);
+__webpack_require__(57);
 
 
 
@@ -14347,7 +14393,7 @@ __webpack_require__(56);
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(75);
+window.Vue = __webpack_require__(76);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -14386,7 +14432,7 @@ window.Errors = __WEBPACK_IMPORTED_MODULE_2__Helpers_core_Errors_js__["a" /* def
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -16770,7 +16816,7 @@ if (typeof jQuery === 'undefined') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)();
@@ -16784,7 +16830,7 @@ exports.push([module.i, "\n.action-link[data-v-42110547] {\n        cursor: poin
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)();
@@ -16798,7 +16844,7 @@ exports.push([module.i, "\n.action-link[data-v-cd94c73c] {\n        cursor: poin
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)();
@@ -16812,7 +16858,7 @@ exports.push([module.i, "\n.action-link[data-v-f49324d8] {\n        cursor: poin
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -33901,10 +33947,10 @@ exports.push([module.i, "\n.action-link[data-v-f49324d8] {\n        cursor: poin
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16), __webpack_require__(76)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16), __webpack_require__(77)(module)))
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34045,7 +34091,7 @@ exports['default'] = {
 module.exports = exports['default'];
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34130,7 +34176,7 @@ exports['default'] = handleKeyDown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34178,7 +34224,7 @@ exports["default"] = injectedHTML;
 module.exports = exports["default"];
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34409,7 +34455,7 @@ exports['default'] = setParameters;
 module.exports = exports['default'];
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34444,9 +34490,9 @@ var _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$r
 
 // Handle button events and keyboard events
 
-var _handleButton$handleConfirm$handleCancel = __webpack_require__(52);
+var _handleButton$handleConfirm$handleCancel = __webpack_require__(53);
 
-var _handleKeyDown = __webpack_require__(53);
+var _handleKeyDown = __webpack_require__(54);
 
 var _handleKeyDown2 = _interopRequireWildcard(_handleKeyDown);
 
@@ -34456,7 +34502,7 @@ var _defaultParams = __webpack_require__(15);
 
 var _defaultParams2 = _interopRequireWildcard(_defaultParams);
 
-var _setParameters = __webpack_require__(55);
+var _setParameters = __webpack_require__(56);
 
 var _setParameters2 = _interopRequireWildcard(_setParameters);
 
@@ -34718,20 +34764,20 @@ if (typeof window !== 'undefined') {
 module.exports = exports['default'];
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(37),
   /* template */
-  __webpack_require__(68),
+  __webpack_require__(69),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/Example.vue"
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34752,20 +34798,20 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(38),
   /* template */
-  __webpack_require__(64),
+  __webpack_require__(65),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/default/Alert.vue"
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/default/Alert.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Alert.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34786,20 +34832,20 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   null,
   /* template */
-  __webpack_require__(65),
+  __webpack_require__(66),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/default/Modal.vue"
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/default/Modal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34820,24 +34866,24 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(71)
+__webpack_require__(72)
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(39),
   /* template */
-  __webpack_require__(66),
+  __webpack_require__(67),
   /* scopeId */
   "data-v-42110547",
   /* cssModules */
   null
 )
-Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/passport/AuthorizedClients.vue"
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/passport/AuthorizedClients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AuthorizedClients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34858,24 +34904,24 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(72)
+__webpack_require__(73)
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(40),
   /* template */
-  __webpack_require__(69),
+  __webpack_require__(70),
   /* scopeId */
   "data-v-cd94c73c",
   /* cssModules */
   null
 )
-Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/passport/Clients.vue"
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/passport/Clients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Clients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34896,24 +34942,24 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(73)
+__webpack_require__(74)
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(41),
   /* template */
-  __webpack_require__(70),
+  __webpack_require__(71),
   /* scopeId */
   "data-v-f49324d8",
   /* cssModules */
   null
 )
-Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/passport/PersonalAccessTokens.vue"
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/passport/PersonalAccessTokens.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PersonalAccessTokens.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34934,20 +34980,20 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(42),
   /* template */
-  __webpack_require__(67),
+  __webpack_require__(68),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/user_hotspot/UserHotspot.vue"
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/user_hotspot/UserHotspot.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] UserHotspot.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34968,7 +35014,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -34988,7 +35034,7 @@ if (false) {
 }
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -35027,7 +35073,7 @@ if (false) {
 }
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -35073,7 +35119,7 @@ if (false) {
 }
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -35280,7 +35326,7 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -35323,7 +35369,7 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -35635,7 +35681,7 @@ if (false) {
 }
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -35835,13 +35881,13 @@ if (false) {
 }
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(48);
+var content = __webpack_require__(49);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -35861,13 +35907,13 @@ if(false) {
 }
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(49);
+var content = __webpack_require__(50);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -35887,13 +35933,13 @@ if(false) {
 }
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -35913,7 +35959,7 @@ if(false) {
 }
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 /**
@@ -35946,7 +35992,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44522,7 +44568,7 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(16)))
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -44550,7 +44596,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(17);

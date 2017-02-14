@@ -25,6 +25,7 @@ class HotspotUsersController extends Controller
 
     public function create()
     {
+        return response(['error' => ['ok', 'sip']], 422);
         return 'ok';
     }
 
