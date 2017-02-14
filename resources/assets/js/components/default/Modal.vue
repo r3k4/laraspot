@@ -1,6 +1,6 @@
 <template>
  
-	<div class="modal fade" id="default-modal">
+	<div class="modal fade" :id="idModal" >
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -26,7 +26,8 @@
 			}
 		},
 		props: [
-			'modalTitle'
+			'modalTitle',
+			'idModal'
 		]
 	}
 </script>

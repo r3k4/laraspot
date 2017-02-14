@@ -4,9 +4,9 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
 
-        <hotspot-user-detail v-bind:dataUser="dataUser"></hotspot-user-detail>
+        <hotspot-user-detail v-bind:idModal="idModal" v-bind:dataUser="dataUser"></hotspot-user-detail>
 
-
+ 
         <default-alert v-if="success_msg">
             <i style="cursor:pointer;" class="fa fa-times pull-right" @click="success_msg = false"></i>
             msg
@@ -15,17 +15,37 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading"> 
+
                     <span class="pull-right">
                         Total : {{ users.total }}
                     </span>
-                    <i v-show="showLoader" class="fa fa-refresh fa-spin fa-4x pull-right"></i>
+  
                     <h3>
                         <i class="fa fa-th-list"></i> User Profile
                     </h3> 
                 </div>
 
-                <div class="panel-body">      
-                    <user-hotspot-search   @pressEnter="searchUsers()" v-model="search_value" @search="searchUsers" @reset="fetchUser(null)"></user-hotspot-search>
+               <div class="panel-body">      
+                   
+                   <!-- search -->
+                      <div class="row">
+                        <i v-show="showLoader" class="fa fa-refresh fa-spin fa-2x pull-left"></i>
+                           <div class="col-md-7 col-md-offset-2">
+                                <input type="text" class="form-control" placeholder="search..." name="search" @keydown.13="searchUsers()" v-model="search_value">                
+                           </div>
+                           <div class="col-md-2">
+                                <button @click="searchUsers" class="btn btn-info pull-right">
+                                    <i class="fa fa-search"></i> Search 
+                                </button>               
+                                <button  v-show="search_value!=''" class="btn btn-danger pull-right" @click="fetchUser(null)">
+                                    <i class="fa fa-times"></i>  
+                                </button>     
+                           </div>
+                    </div> 
+                    <!-- end of search -->
+
+
+
                         <hr>
 
                     <user-hotspot-list-data @getDetail="showDetail" v-bind:users="users" v-bind:Fungsi="Fungsi"></user-hotspot-list-data>
@@ -46,8 +66,7 @@
 Vue.component('hotspot-user-detail', require('./popup/hotspotUserDetail.vue'));
 Vue.component('user-hotspot-pagination', require('./komponen/pagination.vue'));
 Vue.component('user-hotspot-list-data', require('./listData.vue'));
-Vue.component('user-hotspot-search', require('./komponen/search.vue'));
-
+ 
 
 import Radcheck from "../../Models/Radcheck.js";
 
@@ -58,6 +77,8 @@ import Radcheck from "../../Models/Radcheck.js";
         },
         data() {
             return {
+                idModal : 'idModal',
+                idModal2 : '',
                 form : new Form({ nama : '' }),
                 success_msg : false,
                 showLoader : false,
@@ -110,7 +131,7 @@ import Radcheck from "../../Models/Radcheck.js";
                         });                  
             },
             showDetail(username){
-                $('#default-modal').appendTo("body").modal('show');
+                $('#idModal').appendTo("body").modal('show');
                 this.Radcheck.findBy(username).then(response => {
                     this.dataUser = response.data;
                     // console.log(response.data);

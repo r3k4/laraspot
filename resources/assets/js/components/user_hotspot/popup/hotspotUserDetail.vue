@@ -1,5 +1,5 @@
 <template>
-        <default-modal modalTitle="User Hotspot">
+        <default-modal modalTitle="User Hotspot" idModal="idModal"> 
 
             <table v-if="dataUser != null" class="table">
                 <tr>
@@ -32,7 +32,8 @@
 <script>
 export default{
     props: [
-        'dataUser'
+        'dataUser',
+        'idModal'
     ]    
 }
 </script>
