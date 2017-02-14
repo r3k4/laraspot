@@ -23,6 +23,16 @@ class HotspotUsersController extends Controller
     	return $this->radcheck->getAll($search);
     }
 
+    public function find($id)
+    {
+        return $this->radcheck->find($id);        
+    }
+
+    public function findBy($username)
+    {
+        return $this->radcheck->whereUsername($username)->first();        
+    }
+
     public function create()
     {
         return response(['error' => ['ok', 'sip']], 422);

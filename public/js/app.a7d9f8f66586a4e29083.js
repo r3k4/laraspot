@@ -13877,61 +13877,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+Vue.component('hotspot-user-detail', __webpack_require__(96));
+Vue.component('user-hotspot-pagination', __webpack_require__(99));
+Vue.component('user-hotspot-list-data', __webpack_require__(102));
 
 
 
@@ -13993,10 +13942,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             });
         },
         showDetail: function showDetail(username) {
-            console.log(this.Radcheck.findBy(username));
+            var _this3 = this;
+
+            $('#default-modal').appendTo("body").modal('show');
+            this.Radcheck.findBy(username).then(function (response) {
+                _this3.dataUser = response.data;
+                console.log(response.data);
+            });
+
             // this.dataUser = Radcheck.findBy(username);
         }
-    } //methods
+    }, //methods
+    props: [
+        // 'modalTitle'
+    ]
 };
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
@@ -34837,7 +34796,7 @@ module.exports = Component.exports
 
 var Component = __webpack_require__(1)(
   /* script */
-  null,
+  __webpack_require__(94),
   /* template */
   __webpack_require__(66),
   /* scopeId */
@@ -35047,11 +35006,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-dialog"
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "modal-body"
-  }, [_vm._t("default")], 2)])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, [_c('div', {
     staticClass: "modal-header"
   }, [_c('button', {
     staticClass: "close",
@@ -35062,8 +35017,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
     staticClass: "modal-title"
-  }, [_vm._v("\n\t\t\t\t\t Modal title\n\t\t\t\t")])])
-}]}
+  }, [_vm._v("\n\t\t\t\t\t " + _vm._s(_vm.modalTitle) + "\n\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_vm._t("default")], 2)])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -35129,39 +35086,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-10 col-md-offset-1"
-  }, [_c('default-modal', [_c('form', {
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.onSubmit($event)
-      }
-    }
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.nama),
-      expression: "form.nama"
-    }],
-    staticClass: "form-control",
+  }, [_c('hotspot-user-detail', {
     attrs: {
-      "type": "text",
-      "placeholder": "nama..."
-    },
-    domProps: {
-      "value": _vm._s(_vm.form.nama)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.nama = $event.target.value
-      }
+      "dataUser": _vm.dataUser
     }
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-info"
-  }, [_vm._v("\n                submit\n            ")])])]), _vm._v(" "), (_vm.success_msg) ? _c('default-alert', [_c('i', {
+  }), _vm._v(" "), (_vm.success_msg) ? _c('default-alert', [_c('i', {
     staticClass: "fa fa-times pull-right",
     staticStyle: {
       "cursor": "pointer"
@@ -35171,7 +35100,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.success_msg = false
       }
     }
-  }), _vm._v("\n            d asdasd asdas\n        ")]) : _vm._e(), _vm._v(" "), _c('div', {
+  }), _vm._v("\n            msg\n        ")]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
@@ -35243,79 +35172,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-search"
-  }), _vm._v(" Search\n                                        ")])])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('table', {
-    staticClass: "table table-bordered table-hover"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.users.data), function(user, index) {
-    return _c('tr', [_c('td', {
-      staticClass: "text-center"
-    }, [_vm._v(_vm._s(_vm.users.from + index) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.nama))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.username))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.radusergroup.groupname))]), _vm._v(" "), _c('td', [_vm._v("\n                                            " + _vm._s(_vm.Fungsi.size(user.c__total_usage)) + "\n                                        ")]), _vm._v(" "), _c('td', {
-      staticClass: "text-center"
-    }, [_c('i', {
-      staticClass: "fa fa-eye",
-      staticStyle: {
-        "cursor": "pointer"
-      },
-      on: {
-        "click": function($event) {
-          _vm.showDetail(user.username)
-        }
-      }
-    })])])
-  }))]), _vm._v(" "), _c('nav', {
+  }), _vm._v(" Search\n                                        ")])])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('user-hotspot-list-data', {
     attrs: {
-      "aria-label": "..."
-    }
-  }, [_c('ul', {
-    staticClass: "pager"
-  }, [_c('li', {
-    staticClass: "previous"
-  }, [(_vm.users.prev_page_url != null) ? _c('a', {
-    attrs: {
-      "href": "#"
+      "users": _vm.users,
+      "Fungsi": _vm.Fungsi
     },
     on: {
-      "click": function($event) {
-        $event.preventDefault();
+      "getDetail": function($event) {
+        _vm.showDetail(_vm.username)
+      }
+    }
+  }), _vm._v(" "), _c('user-hotspot-pagination', {
+    attrs: {
+      "users": _vm.users
+    },
+    on: {
+      "getPrevPage": function($event) {
         _vm.fetchUser(_vm.users.prev_page_url)
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-arrow-left"
-  }), _vm._v(" Previous\n                                ")]) : _vm._e()]), _vm._v(" "), _c('li', {
-    staticClass: "next"
-  }, [(_vm.users.next_page_url != null) ? _c('a', {
-    attrs: {
-      "href": "#"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
+      },
+      "getNextPage": function($event) {
         _vm.fetchUser(_vm.users.next_page_url)
       }
     }
-  }, [_vm._v("\n                                    Next "), _c('i', {
-    staticClass: "fa fa-arrow-right"
-  })]) : _vm._e()])])]), _vm._v(" "), _c('button', {
-    on: {
-      "click": _vm.showModal
-    }
-  }, [_vm._v("\n        modal\n    ")])])])], 1)])])
+  })], 1)])], 1)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('h3', [_c('i', {
     staticClass: "fa fa-th-list"
   }), _vm._v(" User Profile\n                    ")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', {
-    staticClass: "text-center",
-    attrs: {
-      "width": "10px"
-    }
-  }, [_vm._v("No.")]), _vm._v(" "), _c('th', [_vm._v("Nama")]), _vm._v(" "), _c('th', [_vm._v("Username")]), _vm._v(" "), _c('th', [_vm._v("Profile")]), _vm._v(" "), _c('th', [_vm._v("Usage")]), _vm._v(" "), _c('th', {
-    staticClass: "text-center",
-    attrs: {
-      "width": "100px"
-    }
-  }, [_vm._v("Action")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -44602,6 +44485,406 @@ module.exports = function(module) {
 __webpack_require__(17);
 module.exports = __webpack_require__(18);
 
+
+/***/ }),
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	data: function data() {
+		return {
+			// modalTitle : ""
+		};
+	},
+
+	props: ['modalTitle']
+};
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    props: ['dataUser']
+};
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(95),
+  /* template */
+  __webpack_require__(97),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/user_hotspot/popup/hotspotUserDetail.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] hotspotUserDetail.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-64d9f16a", Component.options)
+  } else {
+    hotAPI.reload("data-v-64d9f16a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('default-modal', {
+    attrs: {
+      "modalTitle": "User Hotspot"
+    }
+  }, [(_vm.dataUser != null) ? _c('table', {
+    staticClass: "table"
+  }, [_c('tr', [_c('td', {
+    attrs: {
+      "width": "150px"
+    }
+  }, [_vm._v("\n                Nama \n            ")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "width": "15px"
+    }
+  }, [_vm._v(":")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.dataUser.username))])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("\n                Password\n            ")]), _vm._v(" "), _c('td', [_vm._v(":")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.dataUser.value))])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "width": "150px"
+    }
+  }, [_vm._v("\n                Profile\n            ")]), _vm._v(" "), _c('td', [_vm._v(":")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.dataUser.fk__radusergroup))])])]) : _vm._e()])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-64d9f16a", module.exports)
+  }
+}
+
+/***/ }),
+/* 98 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+  props: ['users']
+};
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(98),
+  /* template */
+  __webpack_require__(100),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/user_hotspot/komponen/pagination.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] pagination.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-12c8b2c6", Component.options)
+  } else {
+    hotAPI.reload("data-v-12c8b2c6", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('nav', {
+    attrs: {
+      "aria-label": "..."
+    }
+  }, [_c('ul', {
+    staticClass: "pager"
+  }, [_c('li', {
+    staticClass: "previous"
+  }, [(_vm.users.prev_page_url != null) ? _c('a', {
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$emit('getPrevPage')
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-arrow-left"
+  }), _vm._v(" Previous\n        ")]) : _vm._e()]), _vm._v(" "), _c('li', {
+    staticClass: "next"
+  }, [(_vm.users.next_page_url != null) ? _c('a', {
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$emit('getNextPage')
+      }
+    }
+  }, [_vm._v("\n            Next "), _c('i', {
+    staticClass: "fa fa-arrow-right"
+  })]) : _vm._e()])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-12c8b2c6", module.exports)
+  }
+}
+
+/***/ }),
+/* 101 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+
+    props: ['users', 'Fungsi']
+
+};
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(101),
+  /* template */
+  __webpack_require__(103),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/user_hotspot/listData.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] listData.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2d2bbc35", Component.options)
+  } else {
+    hotAPI.reload("data-v-2d2bbc35", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('table', {
+    staticClass: "table table-bordered table-hover"
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.users.data), function(user, index) {
+    return _c('tr', [_c('td', {
+      staticClass: "text-center"
+    }, [_vm._v(_vm._s(_vm.users.from + index) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.nama))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.username))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.radusergroup.groupname))]), _vm._v(" "), _c('td', [_vm._v("\n                " + _vm._s(_vm.Fungsi.size(user.c__total_usage)) + "\n            ")]), _vm._v(" "), _c('td', {
+      staticClass: "text-center"
+    }, [_c('i', {
+      staticClass: "fa fa-eye",
+      staticStyle: {
+        "cursor": "pointer"
+      },
+      on: {
+        "click": function($event) {
+          _vm.$emit('getDetail', [user.name])
+        }
+      }
+    })])])
+  }))])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', {
+    staticClass: "text-center",
+    attrs: {
+      "width": "10px"
+    }
+  }, [_vm._v("No.")]), _vm._v(" "), _c('th', [_vm._v("Nama")]), _vm._v(" "), _c('th', [_vm._v("Username")]), _vm._v(" "), _c('th', [_vm._v("Profile")]), _vm._v(" "), _c('th', [_vm._v("Usage")]), _vm._v(" "), _c('th', {
+    staticClass: "text-center",
+    attrs: {
+      "width": "100px"
+    }
+  }, [_vm._v("Action")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2d2bbc35", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

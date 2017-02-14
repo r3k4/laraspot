@@ -4,21 +4,12 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
 
-    <default-modal>
-        <form @submit.prevent="onSubmit">
-            <div class="form-group">
-                <input type="text" v-model="form.nama" class="form-control" placeholder="nama...">
-            </div>   
-            <button class="btn btn-info">
-                submit
-            </button>         
-        </form>
-    </default-modal>
+        <hotspot-user-detail v-bind:dataUser="dataUser"></hotspot-user-detail>
 
 
         <default-alert v-if="success_msg">
             <i style="cursor:pointer;" class="fa fa-times pull-right" @click="success_msg = false"></i>
-            d asdasd asdas
+            msg
         </default-alert>
 
 
@@ -48,58 +39,12 @@
                                    </div>
                             </div> 
                         <hr>
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" width="10px">No.</th>
-                                        <th>Nama</th>
-                                        <th>Username</th>
-                                        <th>Profile</th>
-                                        <th>Usage</th>
-                                        <th class="text-center" width="100px">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="(user, index) in users.data">
-                                        <td class="text-center">{{ users.from + index }} </td>
-                                        <td>{{ user.nama }}</td>
-                                        <td>{{ user.username }}</td>
-                                        <td>{{ user.radusergroup.groupname }}</td>
-                                        <td>
-                                            {{ Fungsi.size(user.c__total_usage) }}
-                                        </td>
-                                        <td class="text-center">
-                                            <i style="cursor:pointer;" @click="showDetail(user.username)" class="fa fa-eye"></i>
 
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>  
+                    <user-hotspot-list-data @getDetail="showDetail(username)" v-bind:users="users" v-bind:Fungsi="Fungsi"></user-hotspot-list-data>
 
                          
-                        <nav aria-label="...">
-                          <ul class="pager">
-                            <li class="previous">
-                                <a v-if="users.prev_page_url != null" 
-                                   @click.prevent="fetchUser(users.prev_page_url)" 
-                                   href="#">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="next">
-                                <a v-if="users.next_page_url != null" 
-                                   @click.prevent="fetchUser(users.next_page_url)" 
-                                   href="#">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                          </ul>
-                        </nav>    
-
-
-    <button @click="showModal">
-        modal
-    </button>
+                    <user-hotspot-pagination @getPrevPage="fetchUser(users.prev_page_url)" @getNextPage="fetchUser(users.next_page_url)" v-bind:users="users"></user-hotspot-pagination>   
+ 
                 </div>
             </div>
         </div>
@@ -110,6 +55,12 @@
 </template>
 
 <script>
+Vue.component('hotspot-user-detail', require('./popup/hotspotUserDetail.vue'));
+Vue.component('user-hotspot-pagination', require('./komponen/pagination.vue'));
+Vue.component('user-hotspot-list-data', require('./listData.vue'));
+
+
+
 import Radcheck from "../../Models/Radcheck.js";
 
     export default {
@@ -171,10 +122,18 @@ import Radcheck from "../../Models/Radcheck.js";
                         });                  
             },
             showDetail(username){
-                console.log(this.Radcheck.findBy(username));
+                $('#default-modal').appendTo("body").modal('show');
+                this.Radcheck.findBy(username).then(response => {
+                    this.dataUser = response.data;
+                    console.log(response.data);
+                });
+                
                 // this.dataUser = Radcheck.findBy(username);
             }
 
-        } //methods
+        }, //methods
+        props: [
+            // 'modalTitle'
+        ]
     }
 </script>
