@@ -14,6 +14,8 @@
                 </div>
 
                 <div class="panel-body"> 
+                @include($base_view.'komponen.nav_atas')
+                
 
                 @include($base_view.'list_data')
 

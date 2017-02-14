@@ -107,4 +107,28 @@ class Radacct extends Model
     }
 
 
+    public function getDownloadByTgl($tgl)
+    {
+        return $this->whereUsername(auth()->user()->username)
+                    ->whereDate('acctstarttime', '=', $tgl)->sum('acctinputoctets');
+    }
+
+    public function getUploadByTgl($tgl)
+    {
+        return $this->whereUsername(auth()->user()->username)
+                    ->whereDate('acctstarttime', '=', $tgl)->sum('acctoutputoctets');
+    }
+
+
+    public function getGlobalDownloadByTgl($tgl)
+    {
+        return $this->whereDate('acctstarttime', '=', $tgl)->sum('acctinputoctets');
+    }
+
+    public function getGlobalUploadByTgl($tgl)
+    {
+        return $this->whereDate('acctstarttime', '=', $tgl)->sum('acctoutputoctets');
+    }
+
+
 }

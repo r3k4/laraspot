@@ -35,7 +35,7 @@ class Fungsi{
             $ttt = 'Januari';
         }
         if ($rrr == '2' || $rrr == '02') {
-            $ttt = 'Februari';
+            $ttt = 'Pebruari';
         }
         if ($rrr == '3' || $rrr == '03') {
             $ttt = 'Maret';

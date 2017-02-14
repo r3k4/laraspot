@@ -21,8 +21,16 @@ class UsagesController extends Controller
 
     public function index()
     {
+        $usages_home = true;
     	$usages = $this->radacct->getAllUsages();
-    	return view($this->base_view.'index', compact('usages'));
+    	return view($this->base_view.'index', compact('usages', 'usages_home'));
+    }
+
+    public function statistics()
+    {
+        $usages_statistics = true;
+        $radacct = $this->radacct;
+        return view($this->base_view.'statistics.index', compact('usages_statistics', 'radacct'));
     }
 
 

@@ -32,7 +32,7 @@
 
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Matrix Hotspot.
+        <p class="text-muted">{{ config('app.name', 'Laravel') }}.
         <span class="pull-right">
             Developed by Reka Prihatanto
         </span>

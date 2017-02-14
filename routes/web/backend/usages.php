@@ -7,4 +7,10 @@ Route::group([ 'prefix' => 'usages'], function(){
 		'uses'	=> 'UsagesController@index'
 	]);
 
+	Route::get('statistics',[
+		'as'	=> 'backend.usages.statistics',
+		'uses'	=> 'UsagesController@statistics'
+	]);
+
+
 });
