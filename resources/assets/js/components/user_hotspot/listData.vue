@@ -20,7 +20,7 @@
                     {{ Fungsi.size(user.c__total_usage) }}
                 </td>
                 <td class="text-center">
-                    <i style="cursor:pointer;" @click="$emit('getDetail', [user.name])" class="fa fa-eye"></i>
+                    <i style="cursor:pointer;" @click="$emit('getDetail', [user.username])" class="fa fa-eye"></i>
 
                 </td>
             </tr>
