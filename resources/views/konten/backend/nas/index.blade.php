@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+ 
+
 <div class="container animated fadeIn">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -31,6 +34,7 @@
 
 
 @section('custom_script')
+
 <script type="text/javascript">
     function createNas()
     {

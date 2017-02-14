@@ -29,6 +29,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
 	require __DIR__.'/web/backend/user_aktif.php'; 
 	require __DIR__.'/web/backend/passport.php'; 
 	require __DIR__.'/web/backend/nas.php'; 
+	require __DIR__.'/web/backend/statistik.php'; 
 
 	
 

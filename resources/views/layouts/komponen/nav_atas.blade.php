@@ -63,6 +63,13 @@
                </li>
 
 
+               <li @if(isset($backend_statistik_home)) class="active" @endif>
+                    <a href="{{ route('backend.statistik.index') }}">
+                        <i class="fa fa-bar-chart"></i> Statistik
+                    </a>
+               </li>
+
+
             @endif
 
             </ul>
