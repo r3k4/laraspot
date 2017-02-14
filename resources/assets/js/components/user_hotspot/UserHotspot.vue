@@ -56,7 +56,7 @@
                                         <th>Username</th>
                                         <th>Profile</th>
                                         <th>Usage</th>
-                                        <th class="text-center" width="100px"></th>
+                                        <th class="text-center" width="100px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,11 +64,14 @@
                                         <td class="text-center">{{ users.from + index }} </td>
                                         <td>{{ user.nama }}</td>
                                         <td>{{ user.username }}</td>
-                                        <td></td>
+                                        <td>{{ user.radusergroup.groupname }}</td>
                                         <td>
                                             {{ Fungsi.size(user.c__total_usage) }}
                                         </td>
-                                        <td class="text-center">-</td>
+                                        <td class="text-center">
+                                            <i style="cursor:pointer;" @click="showDetail(user.username)" class="fa fa-eye"></i>
+
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>  
@@ -107,7 +110,7 @@
 </template>
 
 <script>
-
+import Radcheck from "./Models/Radcheck.js";
 
     export default {
         mounted() {            
@@ -122,43 +125,47 @@
                 Fungsi : new Fungsi,
                 search_value : "",
                 users : [],
+                dataUser: []
             }
         },
         methods: {
 
-        onSubmit(){
-            this.form.post('/api/hotspot_users/create').then(success_msg => swal('done'));
-        },
+            onSubmit(){
+                this.form.post('/api/hotspot_users/create').then(success_msg => swal('done'));
+            },
 
-        showModal(){
-            $('#default-modal').appendTo("body").modal('show');
-        },
-        searchUsers(){
-            this.showLoader = true;
-            if(this.search_value == ''){
-                this.showLoader = false;
-                return false;
-            } 
-            axios.get('/api/hotspot_users?search='+this.search_value)
-                .then(response => {
-                    this.users = response.data;
+            showModal(){
+                $('#default-modal').appendTo("body").modal('show');
+            },
+            searchUsers(){
+                this.showLoader = true;
+                if(this.search_value == ''){
                     this.showLoader = false;
-             });            
-        },
-        fetchUser(url){
-            this.showLoader = true;
-            if(url == null || url == ''){
-                var url = '/api/hotspot_users';
-            } 
-                axios.get(url)
+                    return false;
+                } 
+                axios.get('/api/hotspot_users?search='+this.search_value)
                     .then(response => {
-                        this.showLoader = false;
-                        this.search_value = '';
                         this.users = response.data;
-                    });
-             
-        }
+                        this.showLoader = false;
+                 });            
+            },
+            fetchUser(url){
+                this.showLoader = true;
+                if(url == null || url == ''){
+                    var url = '/api/hotspot_users';
+                } 
+                    axios.get(url)
+                        .then(response => {
+                            this.showLoader = false;
+                            this.search_value = '';
+                            this.users = response.data;
+                        });
+                 
+            },
+            showDetail(username){
+                this.dataUser = Radcheck.findBy(username);
+            }
 
-        }
+        } //methods
     }
 </script>

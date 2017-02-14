@@ -13820,6 +13820,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+throw new Error("Cannot find module \"./Models/Radcheck.js\"");
 //
 //
 //
@@ -13928,6 +13929,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
@@ -13942,7 +13947,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             showLoader: false,
             Fungsi: new Fungsi(),
             search_value: "",
-            users: []
+            users: [],
+            dataUser: []
         };
     },
 
@@ -13980,8 +13986,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 _this2.search_value = '';
                 _this2.users = response.data;
             });
+        },
+        showDetail: function showDetail(username) {
+            this.dataUser = __WEBPACK_IMPORTED_MODULE_0__Models_Radcheck_js___default.a.findBy(username);
         }
-    }
+    } //methods
 };
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
@@ -34722,7 +34731,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/Example.vue"
+Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34756,7 +34765,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/default/Alert.vue"
+Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/default/Alert.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Alert.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34790,7 +34799,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/default/Modal.vue"
+Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/default/Modal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34828,7 +34837,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/passport/AuthorizedClients.vue"
+Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/passport/AuthorizedClients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AuthorizedClients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34866,7 +34875,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/passport/Clients.vue"
+Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/passport/Clients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Clients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34904,7 +34913,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/passport/PersonalAccessTokens.vue"
+Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/passport/PersonalAccessTokens.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PersonalAccessTokens.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -34938,7 +34947,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/reka/websites/matrix-hotspot/resources/assets/js/components/user_hotspot/UserHotspot.vue"
+Component.options.__file = "/home/man3/websites/matrix-hotspot/resources/assets/js/components/user_hotspot/UserHotspot.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] UserHotspot.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -35193,9 +35202,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.users.data), function(user, index) {
     return _c('tr', [_c('td', {
       staticClass: "text-center"
-    }, [_vm._v(_vm._s(_vm.users.from + index) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.nama))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.username))]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("\n                                            " + _vm._s(_vm.Fungsi.size(user.c__total_usage)) + "\n                                        ")]), _vm._v(" "), _c('td', {
+    }, [_vm._v(_vm._s(_vm.users.from + index) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.nama))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.username))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.radusergroup.groupname))]), _vm._v(" "), _c('td', [_vm._v("\n                                            " + _vm._s(_vm.Fungsi.size(user.c__total_usage)) + "\n                                        ")]), _vm._v(" "), _c('td', {
       staticClass: "text-center"
-    }, [_vm._v("-")])])
+    }, [_c('i', {
+      staticClass: "fa fa-eye",
+      staticStyle: {
+        "cursor": "pointer"
+      },
+      on: {
+        "click": function($event) {
+          _vm.showDetail(user.username)
+        }
+      }
+    })])])
   }))]), _vm._v(" "), _c('nav', {
     attrs: {
       "aria-label": "..."
@@ -35250,7 +35269,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "width": "100px"
     }
-  })])])
+  }, [_vm._v("Action")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
