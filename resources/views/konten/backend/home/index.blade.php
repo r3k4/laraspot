@@ -30,3 +30,11 @@
     </div>
 </div>
 @endsection
+
+@section('custom_script')
+
+<script type="text/javascript">
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+
+@endsection

@@ -106,6 +106,26 @@ class Radacct extends Model
         return $this->where('acctstoptime', '=', null)->get();
     }
 
+    public function getMostUserOnline()
+    {
+        return $this->select(\DB::raw('radacct.*, mst_data_user.nama, mst_data_user.username'))
+                    ->where('acctstoptime', '=', null)
+                    ->leftJoin('mst_data_user', 'mst_data_user.username', '=', 'radacct.username')
+                    ->orderBy('acctoutputoctets', 'DESC')
+                    ->take(4)
+                    ->get();
+    }
+
+    public function getMostActiveUser()
+    {
+        return $this->select(\DB::raw('radacct.username, mst_data_user.nama, sum(acctoutputoctets) as jml'))
+                    ->leftJoin('mst_data_user', 'mst_data_user.username', '=', 'radacct.username')
+                    ->orderBy('acctoutputoctets', 'DESC')
+                    ->groupBy('mst_data_user.username')
+                    ->take(4)
+                    ->get();        
+    }
+
 
     public function getDownloadByTgl($tgl)
     {
