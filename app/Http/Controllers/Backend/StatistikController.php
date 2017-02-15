@@ -20,7 +20,8 @@ class StatistikController extends Controller
 
     public function index()
     {
-    	return view($this->base_view.'index');
+    	$radacct = $this->radacct;
+    	return view($this->base_view.'index', compact('radacct'));
     }
 
 }
