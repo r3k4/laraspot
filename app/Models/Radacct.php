@@ -39,6 +39,18 @@ class Radacct extends Model
     	'xascendsessionsvrkey'
     ];
 
+    protected $appends = [
+        'fk__mst_data_user',
+    ];
+
+    public function getFkMstDataUserAttribute()
+    {
+        $q = $this->mst_data_user;
+        if(count($q)>0){
+            return $q->nama;
+        }
+    }
+
 
 
 
@@ -106,24 +118,25 @@ class Radacct extends Model
         return $this->where('acctstoptime', '=', null)->get();
     }
 
-    public function getMostUserOnline()
+    public function getMostUserOnlineThisMonth()
     {
-        return $this->select(\DB::raw('radacct.*, mst_data_user.nama, mst_data_user.username'))
+        return $this->select(\DB::raw('radacct.*'))
                     ->where('acctstoptime', '=', null)
-                    ->leftJoin('mst_data_user', 'mst_data_user.username', '=', 'radacct.username')
+                    // ->leftJoin('mst_data_user', 'mst_data_user.username', '=', 'radacct.username')
                     ->orderBy('acctoutputoctets', 'DESC')
                     ->take(4)
                     ->get();
     }
 
-    public function getMostActiveUser()
+    public function getMostActiveUserThisMonth()
     {
-        return $this->select(\DB::raw('radacct.username, mst_data_user.nama, sum(acctoutputoctets) as jml'))
-                    ->leftJoin('mst_data_user', 'mst_data_user.username', '=', 'radacct.username')
+        return $this->select(\DB::raw('radacct.username, acctoutputoctets, CAST(sum(acctoutputoctets) as UNSIGNED) as jml'))
                     ->orderBy('acctoutputoctets', 'DESC')
-                    ->groupBy('mst_data_user.username')
+                    ->groupBy('radacct.username')
+                    ->whereMonth('acctstarttime', date('m'))
+                    ->whereYear('acctstarttime', date('Y'))
                     ->take(4)
-                    ->get();        
+                    ->get(); 
     }
 
 

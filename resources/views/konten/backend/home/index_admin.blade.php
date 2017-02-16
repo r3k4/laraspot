@@ -20,7 +20,7 @@
                             @include($base_view.'komponen_admin.top_user_online_today')
                         </div> 
                         <div class="col-md-4">
-                            {{-- @include($base_view.'komponen_admin.top_active_user') --}}
+                            @include($base_view.'komponen_admin.top_active_user')
                         </div> 
 
 

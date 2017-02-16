@@ -6,11 +6,11 @@
     		</td>
     	</tr>
 
-        @foreach($radacct->getMostUserOnline() as $list)
+        @foreach($radacct->getMostUserOnlineThisMonth() as $list)
         <tr>
             <td width="230px">
                 <span data-toggle='tooltip' title='{!! $list->username !!}'>
-                    {!! $list->nama !!}
+                    {!! $list->fk__mst_data_user !!}
                 </span>
             </td>
             <td width="10px">:</td>
