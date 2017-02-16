@@ -139,11 +139,26 @@ class Radacct extends Model
                     ->get(); 
     }
 
-
-    public function getDownloadByTgl($tgl)
+    public function getDownloadThisMonth($username = null)
     {
-        return $this->whereUsername(auth()->user()->username)
-                    ->whereDate('acctstarttime', '=', $tgl)->sum('acctinputoctets');
+        $data = []; 
+        for($i=1;$i <= date('d'); $i++){
+            $tgl = date('Y-m').'-'.date('d', strtotime($i));
+            // \Log::info('tgl '.$tgl);
+            $data[$i] = $this->getDownloadByTgl($tgl, $username);
+        }
+        // \Log::info('data '.json_encode($data));
+        return $data;
+    }
+
+    public function getDownloadByTgl($tgl, $username = null)
+    {
+        if($username == null){
+            $username = auth()->user()->username;
+        }
+        return $this->whereUsername($username)
+                    ->whereDate('acctstarttime', '=', $tgl)
+                    ->sum('acctinputoctets');
     }
 
     public function getUploadByTgl($tgl)
