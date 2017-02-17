@@ -28,47 +28,49 @@
                     </a>
                </li>
 
-               <li @if(isset($backend_hotspot_users_home)) class="active" @endif>
-                    <a href="{{ route('backend.hotspot_users.index') }}">
-                        <i class="fa fa-users"></i> Hotspot Users
-                    </a>
-               </li>
 
-               <li @if(isset($backend_user_aktif_home)) class="active" @endif>
-                    <a href="{{ route('backend.user_aktif.index') }}">
-                        <i class="fa fa-check-circle"></i> User Aktif
-                    </a>
-               </li>
+               @if(auth()->user()->ref_user_level_id == 1)
+                   <li @if(isset($backend_hotspot_users_home)) class="active" @endif>
+                        <a href="{{ route('backend.hotspot_users.index') }}">
+                            <i class="fa fa-users"></i> Hotspot Users
+                        </a>
+                   </li>
 
-
-
-
-               <li @if(isset($backend_hotspot_profile_home)) class="active" @endif>
-                    <a href="{{ route('backend.hotspot_profile.index') }}">
-                        <i class="fa fa-list"></i> Hotspot Profiles
-                    </a>
-               </li>
-
- 
-               <li @if(isset($backend_passport_home)) class="active" @endif>
-                    <a href="{{ route('backend.passport.index') }}">
-                        <i class="fa fa-cubes"></i> Passport
-                    </a>
-               </li>
-
-               <li @if(isset($backend_nas_home)) class="active" @endif>
-                    <a href="{{ route('backend.nas.index') }}">
-                        <i class="fa fa-server"></i> NAS Device
-                    </a>
-               </li>
+                   <li @if(isset($backend_user_aktif_home)) class="active" @endif>
+                        <a href="{{ route('backend.user_aktif.index') }}">
+                            <i class="fa fa-check-circle"></i> User Aktif
+                        </a>
+                   </li>
 
 
-               <li @if(isset($backend_statistik_home)) class="active" @endif>
-                    <a href="{{ route('backend.statistik.index') }}">
-                        <i class="fa fa-bar-chart"></i> Statistik
-                    </a>
-               </li>
 
+
+                   <li @if(isset($backend_hotspot_profile_home)) class="active" @endif>
+                        <a href="{{ route('backend.hotspot_profile.index') }}">
+                            <i class="fa fa-list"></i> Hotspot Profiles
+                        </a>
+                   </li>
+
+     
+                   <li @if(isset($backend_passport_home)) class="active" @endif>
+                        <a href="{{ route('backend.passport.index') }}">
+                            <i class="fa fa-cubes"></i> Passport
+                        </a>
+                   </li>
+
+                   <li @if(isset($backend_nas_home)) class="active" @endif>
+                        <a href="{{ route('backend.nas.index') }}">
+                            <i class="fa fa-server"></i> NAS Device
+                        </a>
+                   </li>
+
+
+                   <li @if(isset($backend_statistik_home)) class="active" @endif>
+                        <a href="{{ route('backend.statistik.index') }}">
+                            <i class="fa fa-bar-chart"></i> Statistik
+                        </a>
+                   </li>
+                @endif
 
             @endif
 
