@@ -83,9 +83,12 @@ Highcharts.chart('container', {
         name: 'Upload',
         color : "#D53232",
         data: [
-            @for($i=1;$i<=date('d');$i++)
-                {{ $radacct->getGlobalDownloadByTgl(date('Y-m-').$i) }},
-            @endfor
+            @foreach($radacct->getUploadThisMonth() as $index => $val)
+                {{ $val }},
+            @endforeach        
+            {{-- @for($i=1;$i<=date('d');$i++) --}}
+                {{-- {{ $radacct->getGlobalDownloadByTgl(date('Y-m-').$i) }}, --}}
+            {{-- @endfor --}}
         ]
     },
      {
