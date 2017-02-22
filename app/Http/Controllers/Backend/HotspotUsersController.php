@@ -28,8 +28,9 @@ class HotspotUsersController extends Controller
 
     public function index()
     {
-    	$hotspot_users = $this->radcheck->getAll(request()->get('search'));
-    	return view($this->base_view.'index', compact('hotspot_users'));
+    	// $hotspot_users = $this->radcheck->getAll(request()->get('search'));
+        // return view($this->base_view.'index', compact('hotspot_users'));
+        return view($this->base_view.'index_js', compact('hotspot_users'));
     }
 
     public function create()
