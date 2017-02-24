@@ -19,6 +19,11 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('hotspot-users', require('./components/user_hotspot/UserHotspot.vue'));
 
 
+// halaman depan
+Vue.component('hotspot-most-active-users-this-month', require('./components/home/MostActiveUserThisMonth.vue'));
+Vue.component('hotspot-top-user-online-this-month', require('./components/home/TopUserOnlineThisMonth.vue'));
+
+
 
 
 Vue.component(

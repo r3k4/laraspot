@@ -139,7 +139,6 @@ import Radcheck from "../../Models/Radcheck.js";
                 
                 // this.dataUser = Radcheck.findBy(username);
             }
-
         }, //methods
         props: [
             // 'modalTitle'

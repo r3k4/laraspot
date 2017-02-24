@@ -18,5 +18,15 @@ Route::group(['prefix' => 'hotspot_users'], function(){
 	Route::post('create',[
 		'uses'	=> 'HotspotUsersController@create'
 	]);	
+	
+	Route::get('getMostActiveUserThisMonth',[
+		'uses'	=> 'HotspotUsersController@getMostActiveUserThisMonth'
+	]);
+
+	Route::get('getMostUserOnlineThisMonth',[
+		'uses'	=> 'HotspotUsersController@getMostUserOnlineThisMonth'
+	]);
+	
+
 
 });
